@@ -1,0 +1,28 @@
+[
+  {
+    "id": 0,
+    "firstName": "Александр",
+    "lastName": "Александров",
+    "patronymic": "Александрович",
+    "basket": {
+      "id": "12312",
+      "products": [
+        {
+          "name": "Папайя",
+          "quantity": 22,
+          "price": 15.99
+        },
+        {
+          "name": "Агава",
+          "quantity": 2,
+          "price": 100.5
+        },
+        {
+          "name": "Бумага",
+          "quantity": 10,
+          "price": 11.1
+        }
+      ]
+    }
+  }
+]

@@ -65,7 +65,8 @@ public class Client {
                             }
                             System.out.println("\nИтого: " + Math.round(sum * 100.0) / 100.0 + "\n");
                             break;
-                        } case "0": {
+                        }
+                        case "0": {
                             return;
                         }
                     }

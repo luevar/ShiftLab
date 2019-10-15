@@ -25,6 +25,7 @@ public class Basket {
 
     /**
      * Метод, добавляющий продукт в текущую корзину
+     *
      * @param product продукт, который добавляется в корзину
      */
     public void addProduct(Product product) {

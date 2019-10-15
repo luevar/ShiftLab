@@ -16,22 +16,22 @@ import java.util.*;
  */
 public class PersonsRepository implements PersonsRepositoryInterface {
 
-    private File file;
+    private final File file;
     private int previousId;
 
     public PersonsRepository() {
         String relativeFilePath = "./src/main/resources/database.json";
         file = new File(relativeFilePath);
-        //Очистка файла для удобства, так как работа идет лишь с 1 пользователем
-        clearFile();
         //Если не очищать файл и хранить базу данных между запусками, то можно использовать
         //данный блок кода для того, чтобы определять есть ли уже в файле записанные пользователи
         try {
+            //Очистка файла для удобства, так как работа идет лишь с 1 пользователем
+            clearFile();
             List<Person> personList = readPersonList();
             previousId = personList.get(personList.size() - 1).getId();
         } catch (ApplicationException io) {
             //логгирование исключения вместо вывода в консоль
-            System.out.println("Проблема со считыванием файла репозитория.");
+            System.out.println(io.getMessage());
         } catch (EmptyFileException ef) {
             previousId = -1;
         }
@@ -102,12 +102,11 @@ public class PersonsRepository implements PersonsRepositoryInterface {
     /**
      * Метод для очистки файла от результатов предыдущих выполнений программы
      */
-    private void clearFile() {
+    private void clearFile() throws ApplicationException {
         try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(("").getBytes());
         } catch (IOException io) {
-            //сделать логгирование исключения вместо вывода в консоль
-            System.out.println("Неудачная очистка файла перед работой программы.");
+            throw new ApplicationException("Некорректная работа записи файла.", io);
         }
     }
 

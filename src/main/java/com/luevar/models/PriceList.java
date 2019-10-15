@@ -6,8 +6,8 @@ import com.luevar.exceptions.ApplicationException;
  * Класс с доступными продуктами и их ценами
  */
 public class PriceList {
-    private String[] products = {"Папайя", "Агава", "Бумага"};
-    private double[] prices = {15.99, 100.5, 11.1};
+    private final String[] products = {"Папайя", "Агава", "Бумага"};
+    private final double[] prices = {15.99, 100.5, 11.1};
 
 
     /**

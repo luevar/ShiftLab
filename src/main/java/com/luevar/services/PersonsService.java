@@ -16,7 +16,7 @@ import java.util.List;
 public class PersonsService implements PersonsServiceInterface {
 
     private final PersonsRepositoryInterface repository;
-    private PriceList priceList;
+    private final PriceList priceList;
 
     public PersonsService(PersonsRepositoryInterface productsRepository) {
         this.repository = productsRepository;

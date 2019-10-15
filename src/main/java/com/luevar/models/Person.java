@@ -5,14 +5,10 @@ package com.luevar.models;
  */
 public class Person {
     private int id;
-    private String firstName;
-    private String lastName;
-    private String patronymic;
-    private Basket basket;
-
-    public Person() {
-        this.basket = new Basket();
-    }
+    private final String firstName;
+    private final String lastName;
+    private final String patronymic;
+    private final Basket basket;
 
     public Person(String firstName, String lastName, String patronymic) {
         this.firstName = firstName;

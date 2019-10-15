@@ -7,8 +7,8 @@ import java.util.List;
  * Класс, описывающий корзину пользователя
  */
 public class Basket {
-    private String id;
-    private List<Product> products;
+    private final String id;
+    private final List<Product> products;
 
     Basket() {
         id = "12312";

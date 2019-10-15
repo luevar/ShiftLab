@@ -9,17 +9,17 @@
       "products": [
         {
           "name": "Папайя",
-          "quantity": 24,
+          "quantity": 2,
           "price": 15.99
         },
         {
           "name": "Агава",
-          "quantity": 2,
+          "quantity": 22,
           "price": 100.5
         },
         {
           "name": "Бумага",
-          "quantity": 5,
+          "quantity": 248,
           "price": 11.1
         }
       ]

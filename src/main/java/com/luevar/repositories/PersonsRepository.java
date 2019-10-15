@@ -11,14 +11,15 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.*;
 
-//Класс, отвечающий за взаимодействие с базой данных
+/**
+ * Класс, отвечающий за взаимодействие с базой данных
+ */
 public class PersonsRepository implements PersonsRepositoryInterface {
 
     private File file;
     private int previousId;
 
     public PersonsRepository() {
-
         String relativeFilePath = "./src/main/resources/database.json";
         file = new File(relativeFilePath);
         //Очищаю файл для удобства, так как мы работаем лишь с 1 пользователем
@@ -36,7 +37,15 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         }
     }
 
-    //Добавление продукта в корзину по id пользователя
+
+    /**
+     * Метод, который добавляет продукт в корзину по id пользователя
+     * @param product продукт, который надо добавить пользователю в корзину
+     * @param personId id пользователя, в чью корзину будет добавляться продукт
+     * @throws IOException пробрасывается в случае ошибки чтения/записи файла
+     * @throws EmptyFileException пробрасывается в случае отсутствия пользователей в базе данных
+     * @throws PersonNotFoundException пробрасывается в случае отсутствия запрашиваемого пользователя в базе данных
+     */
     @Override
     public void updateBasket(Product product, Integer personId) throws IOException, EmptyFileException, PersonNotFoundException {
         List<Person> personList = readPersonList();
@@ -47,9 +56,17 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         writePersonList(personList);
     }
 
-    //Возврат списка продуктов по id пользователя
+
+    /**
+     * Метод возвращает список продуктов по id пользователя
+     * @param personId id пользователя, из корзины которого извлекаются продукты
+     * @return список продуктов пользователя
+     * @throws IOException пробрасывается в случае ошибки чтения/записи файла
+     * @throws EmptyFileException пробрасывается в случае отсутствия пользователей в базе данных
+     * @throws PersonNotFoundException пробрасывается в случае отсутствия запрашиваемого пользователя в базе данных
+     */
     @Override
-    public Collection<Product> provideBasketContent(Integer personId) throws IOException, EmptyFileException, PersonNotFoundException {
+    public List<Product> provideBasketContent(Integer personId) throws IOException, EmptyFileException, PersonNotFoundException {
         List<Person> personList = readPersonList();
         if (personId >= personList.size()) {
             throw new PersonNotFoundException(personId);
@@ -57,7 +74,13 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         return personList.get(personId).getBasket().getProducts();
     }
 
-    //Создание нового пользователя
+
+    /**
+     * Метод, добавляющий нового пользователя в базу данных
+     * @param person пользователь, добавляемый в базу данных
+     * @return id нового пользователя
+     * @throws IOException пробрасывается в случае ошибки чтения/записи файла
+     */
     @Override
     public int addPerson(Person person) throws IOException {
         int id = previousId + 1;
@@ -74,7 +97,10 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         return id;
     }
 
-    //Очистка файла от результатов предыдущих выполнений программы
+
+    /**
+     * Метод для очистки файла от результатов предыдущих выполнений программы
+     */
     private void clearFile() {
         try (FileOutputStream fos = new FileOutputStream(file)) {
             fos.write(("").getBytes());
@@ -84,11 +110,15 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         }
     }
 
-    //Считывать приходится, к сожалению, весь список пользователей целиком, так как не успел
-    //разобраться как с помощью gson десериализовать нужный мне объект по заданному значению поля
-    //Как вариант, можно считывать через буфер для ускорения работы и на случай очень большого количества пользователей
 
-    //Считывание списка пользователей из файла
+
+    //разобраться как с помощью gson десериализовать нужный объект по заданному значению поля
+    /**
+     * Метод, считывающий список пользователей из файла
+     * @return считанный список пользователей
+     * @throws IOException пробрасывается в случае неудачной попытки записи в файл
+     * @throws EmptyFileException пробрасывается в случае отсутствия пользователей в базе данных
+     */
     private List<Person> readPersonList() throws IOException, EmptyFileException {
         BufferedReader reader = new BufferedReader(new FileReader(file));
         StringBuilder json = new StringBuilder();
@@ -105,7 +135,12 @@ public class PersonsRepository implements PersonsRepositoryInterface {
         return personList;
     }
 
-    //Запись списка пользователей в файл
+
+    /**
+     * Метод, записывающий список пользователей в файл
+     * @param personList список пользователей
+     * @throws IOException пробрасывается в случае неудачной попытки записи в файл
+     */
     private void writePersonList(List<Person> personList) throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String jsonPersonArray = gson.toJson(personList);

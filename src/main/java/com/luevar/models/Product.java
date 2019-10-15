@@ -1,5 +1,8 @@
 package com.luevar.models;
 
+/**
+ * Класс, описывающий продукт
+ */
 public class Product {
     private String name;
     private int quantity;

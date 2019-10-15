@@ -3,6 +3,9 @@ package com.luevar.models;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, описывающий корзину пользователя
+ */
 public class Basket {
     private String id;
     private List<Product> products;
@@ -20,6 +23,10 @@ public class Basket {
         return products;
     }
 
+    /**
+     * Метод, добавляющий продукт в текущую корзину
+     * @param product продукт, который добавляется в корзину
+     */
     public void addProduct(Product product) {
         //если такой продукт уже добавляли, то найти его и увеличить его число
         for (Product p : products) {

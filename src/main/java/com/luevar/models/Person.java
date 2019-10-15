@@ -1,5 +1,8 @@
 package com.luevar.models;
 
+/**
+ * Класс, описывающий пользователя
+ */
 public class Person {
     private int id;
     private String firstName;

@@ -8,13 +8,13 @@ import com.luevar.models.Person;
 import com.luevar.models.Product;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 
 public interface PersonsServiceInterface {
 
     void updateBasket(String productLine, Integer personId) throws EmptyFileException, PersonNotFoundException, IOException, ItemNotFoundException, WrongInputException;
 
-    Collection<Product> provideBasketContent(Integer personId) throws EmptyFileException, PersonNotFoundException, IOException;
+    List<Product> provideBasketContent(Integer personId) throws EmptyFileException, PersonNotFoundException, IOException;
 
     String providePriceList();
 

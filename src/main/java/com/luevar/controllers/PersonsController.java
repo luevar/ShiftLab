@@ -9,9 +9,11 @@ import com.luevar.models.Product;
 import com.luevar.services.PersonsServiceInterface;
 
 import java.io.IOException;
-import java.util.Collection;
+import java.util.List;
 
-//В теории принимает http запросы от клиента и пробрасывает их в сервис
+/**
+ * В теории принимает http запросы от клиента и пробрасывает их в сервис
+ */
 public class PersonsController {
 
     private final PersonsServiceInterface service;
@@ -20,7 +22,11 @@ public class PersonsController {
         this.service = service;
     }
 
-    //Добавление продукта в корзину по id пользователя
+    /**
+     * Метод, который добавляет продукт в корзину по id пользователя
+     * @param productLine строка с продуктом и его количеством, введенная пользователем
+     * @param personId id пользователя, в чью корзину будет добавляться продукт
+     */
     public void updateBasket(String productLine, Integer personId) {
         try {
             service.updateBasket(productLine, personId);
@@ -37,8 +43,12 @@ public class PersonsController {
         }
     }
 
-    //Возврат списка продуктов по id пользователя
-    public Collection<Product> provideBasketContent(Integer personId) {
+    /**
+     * Метод возвращает список продуктов по id пользователя
+     * @param personId id пользователя, из корзины которого извлекаются продукты
+     * @return список продуктов пользователя
+     */
+    public List<Product> provideBasketContent(Integer personId) {
         try {
             return service.provideBasketContent(personId);
         } catch (IOException io) {
@@ -51,12 +61,19 @@ public class PersonsController {
         return null;
     }
 
-    //Возврат прайслиста
+    /**
+     * Метод, возвращающий список товаров и цен на них
+     * @return строка, содержащая список товаров и их цен
+     */
     public String providePriceList() {
         return service.providePriceList();
     }
 
-    //Создание нового пользователя
+    /**
+     * Метод, добавляющий нового пользователя в базу данных
+     * @param person пользователь, добавляемый в базу данных
+     * @return id нового пользователя
+     */
     public int addPerson(Person person) {
         try {
             return service.addPerson(person);
